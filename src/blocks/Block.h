@@ -4,6 +4,7 @@
 
 #ifndef BLOCK_H
 #define BLOCK_H
+#include "../Player.h"
 #include "SFML/Graphics/RectangleShape.hpp"
 #include "SFML/Graphics/Sprite.hpp"
 
