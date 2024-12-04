@@ -12,7 +12,7 @@ class Block : public sf::RectangleShape {
 public:
     Block();
     ~Block();
-    void onTouch(Player& whoTouched);
+    virtual void onTouch(Player& whoTouched) = 0;
 private:
     sf::Sprite blockGraphic;
     sf::Vector2f position;

@@ -16,8 +16,12 @@ FetchContent_MakeAvailable(SFML)
 add_executable(main src/main.cpp
         src/Camera.cpp
         src/Camera.h
-        src/Block.cpp
-        src/Block.h)
+        src/blocks/Block.cpp
+        src/blocks/Block.h
+        src/Player.cpp
+        src/Player.h
+        src/items/Item.cpp
+        src/items/Item.h)
 target_link_libraries(main PRIVATE sfml-graphics)
 target_compile_features(main PRIVATE cxx_std_17)
 
