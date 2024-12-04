@@ -1,5 +1,19 @@
-//
-// Created by jdnkw on 12/3/2024.
-//
-
 #include "Player.h"
+#include <iostream>
+
+Player::Player() {
+    if (!texture.loadFromFile("resources/player.png"))
+    {
+        std::cerr << "Failed to load texture" << std::endl;
+    }
+    this->setTexture(texture);
+    this->setPosition(200, 200);
+}
+
+void Player::updatePhysics(sf::Time time) {
+    float dt = time.asSeconds();
+    float dy = 50 * dt;
+    auto position = this->getPosition();
+    std::cout << position.y << " " << dt << " " << position.y + dy << std::endl;
+    this->setPosition(position.x, position.y + dy);
+}

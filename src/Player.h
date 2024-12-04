@@ -1,16 +1,14 @@
-//
-// Created by jdnkw on 12/3/2024.
-//
+#pragma once
+#include "SFML/Graphics/RectangleShape.hpp"
+#include "SFML/Graphics/Sprite.hpp"
+#include "SFML/Graphics.hpp"
+#include "SFML/System/Time.hpp"
 
-#ifndef PLAYER_H
-#define PLAYER_H
-
-
-
-class Player {
-
+class Player : public sf::Sprite{
+public:
+    Player();
+    ~Player()= default;
+    void updatePhysics(sf::Time time);
+private:
+    sf::Texture texture;
 };
-
-
-
-#endif //PLAYER_H
