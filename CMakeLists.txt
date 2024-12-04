@@ -21,7 +21,9 @@ add_executable(main src/main.cpp
         src/Player.cpp
         src/Player.h
         src/items/Item.cpp
-        src/items/Item.h)
+        src/items/Item.h
+        src/MainMenu.h
+        src/MainMenu.cpp)
 target_link_libraries(main PRIVATE sfml-graphics)
 target_compile_features(main PRIVATE cxx_std_17)
 
