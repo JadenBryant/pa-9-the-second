@@ -8,6 +8,9 @@ Player::Player() {
     }
     this->setTexture(texture);
     this->setPosition(200, 200);
+
+    // CAMERA CODE
+    this->Camera.setCenter(this->getPosition());
 }
 
 void Player::updatePhysics(sf::Time time) {

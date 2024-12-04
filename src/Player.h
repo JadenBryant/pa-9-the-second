@@ -9,6 +9,8 @@ public:
     Player();
     ~Player()= default;
     void updatePhysics(sf::Time time);
+
+    sf::View Camera;
 private:
     sf::Texture texture;
 };

@@ -14,8 +14,6 @@ FetchContent_Declare(SFML
 FetchContent_MakeAvailable(SFML)
 
 add_executable(main src/main.cpp
-        src/the_can/Camera.cpp
-        src/the_can/Camera.h
         src/blocks/Block.cpp
         src/blocks/Block.h
         src/Player.cpp

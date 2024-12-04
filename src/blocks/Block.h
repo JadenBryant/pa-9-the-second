@@ -1,25 +1,13 @@
 //
-// Created by jdnkw on 12/3/2024.
+// Created by jaden on 12/2/2024.
 //
 
-#ifndef BLOCK_H
-#define BLOCK_H
-#include "../Player.h"
+#pragma once
 #include "SFML/Graphics/RectangleShape.hpp"
-#include "SFML/Graphics/Sprite.hpp"
 
-
-class Block : public sf::RectangleShape {
-public:
+class Block : sf::RectangleShape {
     Block();
-    ~Block();
-    virtual void onTouch(Player& whoTouched) = 0;
-private:
-    sf::Sprite blockGraphic;
-    sf::Vector2f position;
-    bool isCollidable;
+    virtual ~Block();
+
+    virtual void onContact() = 0;
 };
-
-
-
-#endif //BLOCK_H
