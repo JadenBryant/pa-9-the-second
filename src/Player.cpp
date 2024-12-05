@@ -16,7 +16,7 @@ Player::Player(std::vector<Block> *blocks) {
 
 void Player::updatePhysics(sf::Time time) {
     auto position = getPosition();
-    float moveSpeed = 150.0f, jumpSpeed = 500.0f;
+    float moveSpeed = 200.0f, jumpSpeed = 500.0f;
     float dt = time.asSeconds();
     float dg = 200 * dt;
 
@@ -36,23 +36,30 @@ void Player::updatePhysics(sf::Time time) {
     if (velocity.y > 0)
         velocity.y = 0;
 
-    //jump code
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
-        for (auto &block : *blocks) {
-            auto blockBounds = block.getGlobalBounds();
-            sf::Vector2f testPoint(position.x, position.y + texture.getSize().y / 2 + 2);
-            if (block.getGlobalBounds().contains(testPoint)) {
-                std::cout << "Player Jump" << std::endl;
-                velocity.y = -jumpSpeed;
-                break;
-            }
+    bool falling = true;
+    for (auto &block : *blocks) {
+        auto blockBounds = block.getGlobalBounds();
+        sf::Vector2f testPoint1(position.x + 30, position.y + texture.getSize().y / 2 + 2);
+        sf::Vector2f testPoint2(position.x - 30, position.y + texture.getSize().y / 2 + 2);
+        if (block.getGlobalBounds().contains(testPoint1) || block.getGlobalBounds().contains(testPoint2)) {
+            falling = false;
+            break;
         }
+    }
+
+    //jump code
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up) && falling == false) {
+        std::cout << "Jump" << std::endl;
+        velocity.y = -jumpSpeed;
     }
 
     float dx = velocity.x * dt;
     float dy = velocity.y * dt;
     std::cout << "Player physics: " << position.y << " " << dt << " " << position.y + dg << std::endl;
-    dy += dg;
+    if (falling) {
+
+        dy += dg;
+    }
     this->setPosition(position.x + dx, position.y + dy);
 
     auto playerBounds = getGlobalBounds();
@@ -61,7 +68,7 @@ void Player::updatePhysics(sf::Time time) {
         // std::cout << "Player test" << blockBounds.width << " " << blockBounds.height << " " << blockBounds.getPosition().x << " "<<  blockBounds.getPosition().y << std::endl;
         if (block.getGlobalBounds().intersects(playerBounds)) {
             velocity.y = 0;
-            this->setPosition(position.x, position.y - dy);
+            this->setPosition(position.x, position.y - 1);
             break;
             // std::cout << "Player collision: " << position.y << " " << dt << " " << position.y + dy << std::endl;
         }
