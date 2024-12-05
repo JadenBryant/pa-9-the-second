@@ -16,9 +16,9 @@ Player::Player(std::vector<Block> *blocks) {
 
 void Player::updatePhysics(sf::Time time) {
     auto position = getPosition();
-    float moveSpeed = 150.0f, jumpSpeed = 250.0f;
+    float moveSpeed = 150.0f, jumpSpeed = 500.0f;
     float dt = time.asSeconds();
-    float dg = 100 * dt;
+    float dg = 200 * dt;
 
     //side movement
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
@@ -38,7 +38,15 @@ void Player::updatePhysics(sf::Time time) {
 
     //jump code
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
-
+        for (auto &block : *blocks) {
+            auto blockBounds = block.getGlobalBounds();
+            sf::Vector2f testPoint(position.x, position.y + texture.getSize().y / 2 + 2);
+            if (block.getGlobalBounds().contains(testPoint)) {
+                std::cout << "Player Jump" << std::endl;
+                velocity.y = -jumpSpeed;
+                break;
+            }
+        }
     }
 
     float dx = velocity.x * dt;
@@ -52,6 +60,7 @@ void Player::updatePhysics(sf::Time time) {
         auto blockBounds = block.getGlobalBounds();
         // std::cout << "Player test" << blockBounds.width << " " << blockBounds.height << " " << blockBounds.getPosition().x << " "<<  blockBounds.getPosition().y << std::endl;
         if (block.getGlobalBounds().intersects(playerBounds)) {
+            velocity.y = 0;
             this->setPosition(position.x, position.y - dy);
             break;
             // std::cout << "Player collision: " << position.y << " " << dt << " " << position.y + dy << std::endl;
