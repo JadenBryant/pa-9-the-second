@@ -8,6 +8,6 @@
 
 class Block : public sf::RectangleShape {
 public:
-    Block();
+    Block(int x, int y);
     // virtual void onTouch(Player& whoTouched);
 };
