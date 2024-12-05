@@ -41,6 +41,7 @@ void Player::updatePhysics(sf::Time time) {
             dx = 0;
             dy = -dy;
             this->setPosition(position.x + dx, position.y + dy);
+            break;
             // std::cout << "Player collision: " << position.y << " " << dt << " " << position.y + dy << std::endl;
         }
     }
