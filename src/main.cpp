@@ -9,8 +9,8 @@ int main()
     window.setFramerateLimit(144);
 
     sf::Clock clock;
-    Player player;
-    //Vector<block> map;
+    std::vector<Block> blocks;
+    Player player(&blocks);
     Block block;
 
     sf::View playerCamera;
