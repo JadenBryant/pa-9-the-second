@@ -16,7 +16,7 @@ int main()
     std::vector<Block> blocks;
     Player player(&blocks);
 
-    std::ifstream inputFile("../../src/resources/mapData.txt");
+    std::ifstream inputFile("../../src/resources/mapData_2.txt");
     if (inputFile.is_open()) {
         loadMap(blocks, inputFile, window.getSize());
     }
@@ -70,7 +70,7 @@ void loadMap(std::vector<Block>& map, std::ifstream& mapFile, const sf::Vector2u
 
         if (blockType == "basicBlock") {
             // all blocks placed on the bottom for now (will change)
-            map.emplace_back(std::stoi(x) * 50, windowSize.y - 50);
+            map.emplace_back(std::stoi(x) * 50, (windowSize.y - 50) - (std::stoi(y) * 50));
             std::cout << "Block at position " << x << "," << y << " pushed to map vector" << std::endl;
         }
     }
