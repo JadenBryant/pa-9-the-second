@@ -1,6 +1,5 @@
 #pragma once
 #include "blocks/Block.h"
-#include "SFML/Graphics/RectangleShape.hpp"
 #include "SFML/Graphics/Sprite.hpp"
 #include "SFML/Graphics.hpp"
 #include "SFML/System/Time.hpp"

@@ -9,9 +9,5 @@
 class Block : public sf::RectangleShape {
 public:
     Block();
-    //virtual void onTouch(Player& whoTouched);
-private:
-    sf::Sprite blockGraphic;
-    sf::Vector2f position;
-    bool isCollidable;
+    // virtual void onTouch(Player& whoTouched);
 };

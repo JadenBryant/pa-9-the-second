@@ -29,7 +29,21 @@ void Player::updatePhysics(sf::Time time) {
     float dt = time.asSeconds();
     float dy = 50 * dt;
     float dx = velocity.x * dt;
-    auto position = this->getPosition();
-    std::cout << "Player physics:" << position.y << " " << dt << " " << position.y + dy << std::endl;
+    auto position = getPosition();
+    std::cout << "Player physics: " << position.y << " " << dt << " " << position.y + dy << std::endl;
     this->setPosition(position.x + dx, position.y + dy);
+
+    auto playerBounds = getGlobalBounds();
+    for (auto &block : *blocks) {
+        auto blockBounds = block.getGlobalBounds();
+        // std::cout << "Player test" << blockBounds.width << " " << blockBounds.height << " " << blockBounds.getPosition().x << " "<<  blockBounds.getPosition().y << std::endl;
+        if (block.getGlobalBounds().intersects(playerBounds)) {
+            dx = 0;
+            dy = -dy;
+            this->setPosition(position.x + dx, position.y + dy);
+            // std::cout << "Player collision: " << position.y << " " << dt << " " << position.y + dy << std::endl;
+        }
+    }
+
+
 }

@@ -12,6 +12,8 @@ int main()
     std::vector<Block> blocks;
     Player player(&blocks);
     Block block;
+    block.setPosition(200, 600);
+    blocks.emplace_back(block);
 
     sf::View playerCamera;
     playerCamera.setCenter(sf::Vector2f(window.getSize().x / 2, window.getSize().y / 2));
@@ -28,8 +30,6 @@ int main()
         }
 
         window.clear(sf::Color::Blue);
-
-        block.setPosition(600, 600);
         window.draw(block);
 
         sf::Time elapsed = clock.restart();
