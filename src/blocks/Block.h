@@ -4,10 +4,17 @@
 
 #pragma once
 #include "SFML/Graphics/RectangleShape.hpp"
+#include "SFML/Graphics/Sprite.hpp"
 
 class Block : sf::RectangleShape {
     Block();
-    virtual ~Block();
-
-    virtual void onContact() = 0;
+    //virtual void onTouch(Player& whoTouched);
+private:
+    sf::Sprite blockGraphic;
+    sf::Vector2f position;
+    bool isCollidable;
 };
+
+
+
+#endif //BLOCK_H

@@ -4,4 +4,7 @@
 
 #include "Block.h"
 
-
+Block::Block() {
+    this->setSize(sf::Vector2f(50.f, 50.f));
+    this->setFillColor(sf::Color(100, 250, 50));
+}

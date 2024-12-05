@@ -1,17 +1,21 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
 #include "Player.h"
+#include "blocks/Block.h"
 
 int main()
 {
-    auto window = sf::RenderWindow({1920u, 1080u}, "CMake SFML Project");
+    auto window = sf::RenderWindow({1920u, 1080u}, "Racing Game");
     window.setFramerateLimit(144);
 
     sf::Clock clock;
     Player player;
-    sf::View playerCamera = player.Camera;
+    Vector<block> map;
+    Block block;
 
-    playerCamera.setSize(sf::Vector2f(window.getSize()));
+    sf::View playerCamera;
+    playerCamera.setCenter(sf::Vector2f(window.getSize().x / 2, window.getSize().y / 2));
+    playerCamera.setSize(sf::Vector2f(window.getSize().x, window.getSize().y));
 
     while (window.isOpen())
     {
@@ -25,18 +29,12 @@ int main()
 
         window.clear(sf::Color::Blue);
 
-        sf::RectangleShape shape(sf::Vector2f(120.f, 50.f));
-        // set the shape color to green
-        shape.setFillColor(sf::Color(100, 250, 50));
-        shape.setPosition(600, 800);
-        window.draw(shape);
+        block.setPosition(600, 600);
+        window.draw(block);
 
         sf::Time elapsed = clock.restart();
         player.updatePhysics(elapsed);
-
-        window.setView(playerCamera);
-        playerCamera.setCenter(sf::Vector2f(player.getPosition().x, player.getPosition().y));
-
+        playerCamera.setCenter(player.getPosition());
         window.draw(player);
 
         window.display();
