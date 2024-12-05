@@ -10,7 +10,7 @@ int main()
 
     sf::Clock clock;
     Player player;
-    Vector<block> map;
+    //Vector<block> map;
     Block block;
 
     sf::View playerCamera;

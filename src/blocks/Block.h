@@ -6,7 +6,8 @@
 #include "SFML/Graphics/RectangleShape.hpp"
 #include "SFML/Graphics/Sprite.hpp"
 
-class Block : sf::RectangleShape {
+class Block : public sf::RectangleShape {
+public:
     Block();
     //virtual void onTouch(Player& whoTouched);
 private:
@@ -14,7 +15,3 @@ private:
     sf::Vector2f position;
     bool isCollidable;
 };
-
-
-
-#endif //BLOCK_H
