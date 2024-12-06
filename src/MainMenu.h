@@ -18,8 +18,6 @@ public:
 private:
     void initMenu();
     void centerText(sf::Text& text, float yPosition);
-    void moveUp();
-    void moveDown();
     bool isMouseOverItem(const sf::Text& text) const;
 
     sf::RenderWindow& window;

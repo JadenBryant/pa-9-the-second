@@ -12,7 +12,7 @@ MainMenu::MainMenu(sf::RenderWindow& window) : window(window), selectedItemIndex
 
 void MainMenu::initMenu() {
     const std::vector<std::string> items = {"Play", "Options", "Credits", "Exit"};
-    float yOffSet = 200.0f;
+    float yOffSet = 400.0f;
     float spacing = 75.0f;
 
     for (int i = 0; i < items.size(); i++) {
@@ -31,8 +31,16 @@ void MainMenu::initMenu() {
     title.setString("Platformer Game");
     title.setCharacterSize(60);
     title.setFillColor(sf::Color::White);
-    centerText(title, 100.0f);
+    centerText(title, 300.0f);
     menuItems.insert(menuItems.begin(), title);
+
+    sf::Text instructions;
+    instructions.setFont(font);
+    instructions.setString("Use arrow keys to move, reach the flag to win!");
+    instructions.setCharacterSize(20);
+    instructions.setFillColor(sf::Color::White);
+    centerText(instructions, 750.0f);
+    menuItems.insert(menuItems.begin(), instructions);
 }
 
 void MainMenu::centerText(sf::Text& text, float yPosition) {
@@ -40,6 +48,12 @@ void MainMenu::centerText(sf::Text& text, float yPosition) {
     text.setOrigin(textRect.left + textRect.width / 2.0f,
                    textRect.top + textRect.height / 2.0f);
     text.setPosition(window.getSize().x / 2.0f, yPosition);
+}
+
+bool MainMenu::isMouseOverItem(const sf::Text& text) const {
+    sf::Vector2i mousePosition = sf::Mouse::getPosition(window);
+    sf::Vector2f worldPos = window.mapPixelToCoords(mousePosition);
+    return text.getGlobalBounds().contains(worldPos);
 }
 
 void MainMenu::draw() {
@@ -57,32 +71,18 @@ void MainMenu::draw() {
     window.display();
 }
 
-void MainMenu::moveUp() {
-    if (selectedItemIndex - 1 >= 0) {
-        selectedItemIndex--;
-    }
-}
-
-void MainMenu::moveDown() {
-    if (selectedItemIndex + 1 < menuItems.size() - 1) {
-        selectedItemIndex++;
-    }
-}
-
-bool MainMenu::isMouseOverItem(const sf::Text& text) const {
-    sf::Vector2i mousePosition = sf::Mouse::getPosition(window);
-    sf::Vector2f worldPos = window.mapPixelToCoords(mousePosition);
-    return text.getGlobalBounds().contains(worldPos);
-}
-
 void MainMenu::handleInput(const sf::Event& event) {
     if (event.type == sf::Event::KeyPressed) {
         switch (event.key.code) {
             case sf::Keyboard::Up:
-                moveUp();
+                if (selectedItemIndex + 1 < menuItems.size() - 1) {
+                    selectedItemIndex++;
+                }
                 break;
             case sf::Keyboard::Down:
-                moveDown();
+                if (selectedItemIndex + 1 < menuItems.size() - 1) {
+                    selectedItemIndex++;
+                }
                 break;
             case sf::Keyboard::Return:
                 switch (selectedItemIndex) {
