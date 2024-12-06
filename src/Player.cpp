@@ -19,7 +19,7 @@ Player::Player(std::vector<Block> *blocks) {
 
 void Player::updatePhysics(sf::Time time) {
     auto position = getPosition();
-    float moveSpeed = (this->walkSpeed * 100.0f), jumpSpeed = 500.0f;
+    float moveSpeed = (this->walkSpeed * 100.0f), jumpSpeed = 400.0f;
     float dt = time.asSeconds();
     float dg = 200 * dt;
 

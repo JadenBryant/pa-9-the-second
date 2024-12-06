@@ -10,5 +10,5 @@ public:
     explicit FinishBlock(sf::Vector2f position);
     FinishBlock(int x, int y);
 
-    static void onTouch(bool& isGameOver, Player& whoTouched);
+    void onTouch(Player& whoTouched) override;
 };
