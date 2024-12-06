@@ -4,21 +4,24 @@
 
 #include "FinishBlock.h"
 
+#include <iostream>
+
 #include "../Player.h"
 
 FinishBlock::FinishBlock(sf::Vector2f position) : Block(position) {
-    isCollidable = true;
+    isCollidable = false;
     this->setFillColor(sf::Color(255, 255, 255));
     this->Type = "FinishBlock";
 }
 
 FinishBlock::FinishBlock(int x, int y) : Block(x, y) {
-    isCollidable = true;
+    isCollidable = false;
     this->setFillColor(sf::Color(255, 255, 255));
     this->Type = "FinishBlock";
 }
 
-void FinishBlock::onTouch(bool& isGameOver, Player& whoTouched) {
+void FinishBlock::onTouch(Player& whoTouched) {
+    std::cout << "Finish block was touched" << std::endl;
     whoTouched.setWalkSpeed(0);
-    isGameOver = true;
+    //isGameOver = true;
 }
