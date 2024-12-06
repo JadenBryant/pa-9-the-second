@@ -14,13 +14,15 @@ int main() {
             if (event.type == sf::Event::Closed) {
                 window.close();
             }
-            menu.handleInput(event);
+            if (showMainMenu) {
+                menu.handleInput(event);
+            }
         }
 
         if (showMainMenu) {
             window.clear();
             menu.draw();
-            window.display();
+            // window.display();
 
             if (menu.startGame()) {
                 showMainMenu = false;
