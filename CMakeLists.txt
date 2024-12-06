@@ -30,6 +30,12 @@ add_executable(main src/main.cpp
         src/Game.cpp
         src/blocks/DisappearingBlock.cpp
         src/blocks/DisappearingBlock.h
+        src/blocks/SpeedBoostBlock.cpp
+        src/blocks/SpeedBoostBlock.h
+        src/blocks/SlowBlock.cpp
+        src/blocks/SlowBlock.h
+        src/blocks/KillBlock.cpp
+        src/blocks/KillBlock.h
 )
 target_link_libraries(main PRIVATE sfml-graphics)
 target_compile_features(main PRIVATE cxx_std_17)

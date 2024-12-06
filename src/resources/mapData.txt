@@ -6,6 +6,7 @@ Block,3,0
 Block,4,0
 Block,5,0
 Block,6,0
+FinalBlock,6,5
 Block,7,0
 Block,8,0
 Block,9,0
@@ -36,9 +37,12 @@ Block,37,0
 Block,38,0
 Block,39,0
 Block,41,0
+SpeedBoostBlock,41,4
 Block,42,0
 Block,43,0
+SpeedBoostBlock,43,4
 Block,44,0
+SpeedBoostBlock,45,4
 Block,46,0
 Block,47,0
 Block,48,0
@@ -47,12 +51,15 @@ Block,50,0
 Block,51,0
 Block,52,0
 Block,53,0
+SlowBlock,53,4
 Block,54,0
 Block,55,0
 Block,56,0
+SlowBlock,56,4
 Block,57,0
 Block,58,0
 Block,59,0
+SlowBlock,59,4
 Block,60,1
 Block,61,1
 Block,62,1
@@ -77,6 +84,7 @@ Block,80,3
 Block,81,3
 Block,82,3
 Block,83,3
+KillBlock,83,7
 Block,84,3
 Block,85,3
 Block,86,3

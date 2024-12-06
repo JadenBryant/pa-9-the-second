@@ -8,6 +8,9 @@
 
 #include "blocks/DisappearingBlock.h"
 #include "blocks/FinishBlock.h"
+#include "blocks/KillBlock.h"
+#include "blocks/SlowBlock.h"
+#include "blocks/SpeedBoostBlock.h"
 #include "SFML/Graphics/Texture.hpp"
 
 using sf::Texture;
@@ -29,6 +32,18 @@ bool Map::loadBlockTextures() {
     finishBlockTexture->loadFromFile("resources/blocks/FinishBlock.png");
     this->blockTextures.push_back(finishBlockTexture);
 
+    const auto speedBlockTexture = new Texture();
+    speedBlockTexture->loadFromFile("resources/blocks/SpeedBoostBlock.png");
+    this->blockTextures.push_back(speedBlockTexture);
+
+    const auto slowBlockTexture = new Texture();
+    slowBlockTexture->loadFromFile("resources/blocks/SlowBlock.png");
+    this->blockTextures.push_back(slowBlockTexture);
+
+    const auto killBlockTexture = new Texture();
+    killBlockTexture->loadFromFile("resources/blocks/KillBlock.png");
+    this->blockTextures.push_back(killBlockTexture);
+
     return success;
 }
 
@@ -40,6 +55,12 @@ bool Map::applyBlockTextures() {
             blocks[i]->setTexture(this->blockTextures[0]);
         } else if (blocks[i]->Type == "FinishBlock") {
             blocks[i]->setTexture(this->blockTextures[1]);
+        } else if (blocks[i]->Type == "SpeedBoostBlock") {
+            blocks[i]->setTexture(this->blockTextures[2]);
+        } else if (blocks[i]->Type == "SlowBlock") {
+            blocks[i]->setTexture(this->blockTextures[3]);
+        } else if (blocks[i]->Type == "KillBlock") {
+            blocks[i]->setTexture(this->blockTextures[4]);
         }
     }
 
@@ -74,10 +95,14 @@ bool Map::loadMap(const sf::Vector2u& windowSize) {
                 // std::cout << "Block at position " << x << "," << y << " pushed to map vector" << std::endl;
             } else if (blockType == "FinishBlock") {
                 this->blocks.push_back(new FinishBlock(blockPosition.x, blockPosition.y));
-                std::cout << "Block at position " << x << "," << y << " pushed to map vector" << std::endl;
-            }else if (blockType == "DisappearingBlock") {
+            } else if (blockType == "DisappearingBlock") {
                 this->blocks.push_back(new DisappearingBlock(blockPosition.x, blockPosition.y));
-                std::cout<<"Block at position " << x << "," << y << " pushed to map vector" << std::endl;
+            } else if (blockType == "SpeedBoostBlock") {
+                this->blocks.push_back(new SpeedBoostBlock(blockPosition.x, blockPosition.y));
+            } else if (blockType == "SlowBlock") {
+                this->blocks.push_back(new SlowBlock(blockPosition.x, blockPosition.y));
+            } else if (blockType == "KillBlock") {
+                this->blocks.push_back(new KillBlock(blockPosition.x, blockPosition.y));
             }
         }
     }
