@@ -25,9 +25,9 @@ DisappearingBlock(sf::Vector2f(static_cast<float>(x), static_cast<float>(y))) {
 void DisappearingBlock::onTouch(Player &whoTouched) {
 
 if (isCollidable) {
-    transparency -= 5.0f;
+    transparency -= 5.0f; // Slowly turn down the transparency..
     if (transparency <= 0) {
-        isCollidable = false;
+        isCollidable = false; // ..make it phasable if invisible.
     }
     sf::Color currColor = this->getFillColor();
     this->setFillColor(sf::Color(currColor.r, currColor.g, currColor.b, static_cast<sf::Uint8>(transparency)));
