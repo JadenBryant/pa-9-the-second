@@ -12,7 +12,7 @@ CreditsScreen::CreditsScreen(sf::RenderWindow& window) : window(window), backToM
 
 void CreditsScreen::initCredits() {
     const std::vector<std::string> items = {"Graphics: Jaden Bryant", "Physics: Daniel Bereza", "Level Design: Jackson Lusk", "Menus: Tim Xu"};
-    float yOffSet = 300.0f;
+    float yOffSet = 350.0f;
     float spacing = 50.0f;
 
     for (int i = 0; i < items.size(); i++) {
@@ -29,12 +29,12 @@ void CreditsScreen::initCredits() {
     title.setString("Credits");
     title.setCharacterSize(80);
     title.setFillColor(sf::Color::White);
-    centerText(title, 200);
+    centerText(title, 250);
 
     button.setFont(font);
     button.setString("Back to Main Menu");
     button.setCharacterSize(30);
-    button.setFillColor(sf::Color::White);
+    button.setFillColor(sf::Color::Yellow);
     centerText(button, 600);
 }
 

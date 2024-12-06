@@ -13,6 +13,19 @@ Game::Game(sf::RenderWindow &window)
       blocks(&gameMap.blocks),
       player(blocks),
       playerCamera(player.Camera) {
+
+    backgroundTexture.loadFromFile("resources/ScrollingBackground.jpg");
+
+    int numBackgrounds = 6;
+    sf::Vector2u textureSize = backgroundTexture.getSize();
+    for (int i = 0; i < numBackgrounds; i++) {
+        sf::Sprite backgroundSprite;
+        backgroundSprite.setTexture(backgroundTexture);
+        backgroundSprite.setScale(0.8, 0.8);
+        backgroundSprite.setPosition(i * (textureSize.x * 0.8) - 300, 0);
+        backgroundSprites.push_back(backgroundSprite);
+    }
+
     window.setFramerateLimit(144);
     playerCamera.setSize(sf::Vector2f(window.getSize()));
     // Load font
@@ -65,6 +78,12 @@ void Game::update() {
 
     // PLAYER CAMERA
     playerCamera.setCenter(sf::Vector2f(player.getPosition().x, player.getPosition().y));
+
+    // BACKGROUND SCROLLING
+    float scrollFactor = 0.0001f; // Adjust this factor to make the background scroll slower
+    for (auto& backgroundSprite : backgroundSprites) {
+        backgroundSprite.setPosition(-player.getPosition().x * scrollFactor + backgroundSprite.getPosition().x, 0);
+    }
 }
 
 void Game::render() {
@@ -72,6 +91,9 @@ void Game::render() {
 
     // DRAW WORLD
     window.setView(playerCamera);
+    for (const auto& backgroundSprite : backgroundSprites) {
+        window.draw(backgroundSprite);
+    }
     for (const auto block : *blocks) {
         window.draw(*block);
         if ((*block).Type == "FinishBlock") {

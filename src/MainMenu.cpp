@@ -10,11 +10,17 @@ MainMenu::MainMenu(sf::RenderWindow& window) : window(window), selectedItemIndex
     titleFont.loadFromFile("resources/Gluten-Bold.ttf");
     font1.loadFromFile("resources/Grandstander-Regular.ttf");
     font2.loadFromFile("resources/WorkSans-Regular.ttf");
+    backgroundTexture.loadFromFile("resources/Sky-with-Clouds.jpeg");
+    initMenu();
     initMenu();
 }
 
 void MainMenu::initMenu() {
-    const std::vector<std::string> items = {"Play", "Options", "Credits", "Exit"};
+    backgroundSprite.setTexture(backgroundTexture);
+    backgroundSprite.setScale(0.95, 0.95);
+    backgroundSprite.setPosition(-200, -150);
+
+    const std::vector<std::string> items = {"Play", "Credits", "Exit"};
     float yOffSet = 400.0f;
     float spacing = 75.0f;
 
@@ -60,9 +66,10 @@ bool MainMenu::isMouseOverItem(const sf::Text& text) const {
 }
 
 void MainMenu::draw() {
+    window.draw(backgroundSprite);
     for (int i = 0; i < menuItems.size(); i++) {
         if (i > 0) {
-            if (i - 1 == selectedItemIndex || isMouseOverItem(menuItems[i])) {
+            if (isMouseOverItem(menuItems[i])) {
                 menuItems[i].setFillColor(sf::Color::Yellow);
             } else {
                 menuItems[i].setFillColor(sf::Color::White);
@@ -70,7 +77,6 @@ void MainMenu::draw() {
         }
         window.draw(menuItems[i]);
     }
-
     window.display();
 }
 
@@ -78,31 +84,28 @@ void MainMenu::handleInput(const sf::Event& event) {
     if (event.type == sf::Event::KeyPressed) {
         switch (event.key.code) {
             case sf::Keyboard::Up:
-                if (selectedItemIndex + 1 < menuItems.size() - 1) {
-                    selectedItemIndex++;
+                if (selectedItemIndex > 0) {
+                    selectedItemIndex--;
                 }
-                break;
+            break;
             case sf::Keyboard::Down:
-                if (selectedItemIndex + 1 < menuItems.size() - 1) {
+                if (selectedItemIndex + 1 < menuItems.size() - 2) {
                     selectedItemIndex++;
                 }
-                break;
+            break;
             case sf::Keyboard::Return:
                 switch (selectedItemIndex) {
                     case 0:
                         gameStart = true;
-                        break;
+                    break;
                     case 1:
-                        std::cout << "Opening options..." << std::endl;
-                        break;
-                    case 2:
                         credits = true;
-                        break;
-                    case 3:
+                    break;
+                    case 2:
                         window.close();
-                        break;
+                    break;
                 }
-                break;
+            break;
             default:
                 break;
         }
@@ -112,7 +115,7 @@ void MainMenu::handleInput(const sf::Event& event) {
         if (event.mouseButton.button == sf::Mouse::Left) {
             for (int i = 1; i < menuItems.size(); i++) {
                 if (isMouseOverItem(menuItems[i])) {
-                    selectedItemIndex = i - 1;
+                    selectedItemIndex = i - 2;
 
                     sf::Event enterEvent;
                     enterEvent.type = sf::Event::KeyPressed;

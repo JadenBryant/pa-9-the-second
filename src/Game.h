@@ -1,7 +1,3 @@
-//
-// Created by Tim Xu on 12/5/24.
-//
-
 #ifndef GAME_H
 #define GAME_H
 
@@ -15,13 +11,16 @@ class Game {
 public:
     Game(sf::RenderWindow &window);
     void run();
+    void update();
+    void draw();
 
 private:
     void processEvents();
-    void update();
     void render();
 
     sf::RenderWindow &window;
+    sf::Texture backgroundTexture;
+    std::vector<sf::Sprite> backgroundSprites;
     bool isGameOver;
     int timeToComplete;
     int timeRemaining;

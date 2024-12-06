@@ -29,6 +29,8 @@ private:
     int selectedItemIndex;
     bool gameStart;
     bool credits;
+    sf::Texture backgroundTexture;
+    sf::Sprite backgroundSprite;
 };
 
 #endif // MAINMENU_H
