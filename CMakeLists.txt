@@ -27,7 +27,10 @@ add_executable(main src/main.cpp
         src/Map.cpp
         src/Map.h
         src/Game.h
-        src/Game.cpp)
+        src/Game.cpp
+        src/blocks/DisappearingBlock.cpp
+        src/blocks/DisappearingBlock.h
+)
 target_link_libraries(main PRIVATE sfml-graphics)
 target_compile_features(main PRIVATE cxx_std_17)
 
