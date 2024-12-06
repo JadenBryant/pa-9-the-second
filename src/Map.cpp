@@ -24,6 +24,8 @@ Map::Map(const sf::Vector2u& windowSize) {
 bool Map::loadBlockTextures() {
     bool success = true;
 
+    // LOADING EACH TEXTURE AND STORING THEM IN A VECTOR
+    
     const auto blockTexture = new Texture();
     blockTexture->loadFromFile("resources/blocks/Block.png");
     this->blockTextures.push_back(blockTexture);
@@ -50,6 +52,8 @@ bool Map::loadBlockTextures() {
 bool Map::applyBlockTextures() {
     bool success = true;
 
+    // ITERATING THROUGH LOADED BLOCKS AND APPLYING TEXTURES
+    
     for (int i = 0; i < this->blocks.size(); i++) {
         if (blocks[i]->Type == "Block") {
             blocks[i]->setTexture(this->blockTextures[0]);
@@ -88,11 +92,11 @@ bool Map::loadMap(const sf::Vector2u& windowSize) {
             std::getline(ss, x, ',');
             std::getline(ss, y);
 
-            sf::Vector2f blockPosition(std::stoi(x) * 50, (windowSize.y - 50) - (std::stoi(y) * 50));
+            sf::Vector2f blockPosition(std::stoi(x) * 50, (windowSize.y - 50) - (std::stoi(y) * 50)); // Bottom of window (if player view isn't updated)
 
+            // Instantiating appropriate block per type
             if (blockType == "Block") {
                 this->blocks.emplace_back(new Block(blockPosition.x, blockPosition.y));
-                // std::cout << "Block at position " << x << "," << y << " pushed to map vector" << std::endl;
             } else if (blockType == "FinishBlock") {
                 this->blocks.push_back(new FinishBlock(blockPosition.x, blockPosition.y));
             } else if (blockType == "DisappearingBlock") {
