@@ -2,7 +2,7 @@ BlockType,X,Y
 Block,0,0
 Block,1,0
 Block,2,0
-Block,3,0
+DisappearingBlock,3,1
 Block,4,0
 Block,5,0
 Block,6,0
@@ -89,7 +89,7 @@ Block,84,3
 Block,85,3
 Block,86,3
 Block,87,3
-Block,88,3
+DisappearingBlock,88,3
 Block,89,3
 Block,90,4
 Block,91,4
@@ -111,7 +111,7 @@ Block,122,3
 Block,126,1
 Block,129,3
 Block,133,1
-Block,136,3
+DisappearingBlock,136,3
 Block,140,1
 Block,143,3
 Block,147,1
