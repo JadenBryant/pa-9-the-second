@@ -1,4 +1,4 @@
-## PA9 for WSU CPT122 clas
+# PA 9 game for WSU CPTS 122 class
 Made by students in Lab Section 9
 * Daniel Bereza
 * Tim Xu
@@ -6,6 +6,10 @@ Made by students in Lab Section 9
 * Jackson Lusk
 
 Control with arrow keys and try to finish the platforming as fast as you can
+
+Game in action!: https://youtu.be/QdaqQJFlajQ
+
+---
 
 # CMake SFML Project Template
 
