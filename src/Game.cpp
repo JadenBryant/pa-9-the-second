@@ -4,8 +4,8 @@
 
 #include "Game.h"
 
-Game::Game()
-    : window(sf::VideoMode(1920, 1080), "Racing Game"),
+Game::Game(sf::RenderWindow &window)
+    : window(window),
       isGameOver(false),
       timeToComplete(60),
       timeRemaining(999),
@@ -15,7 +15,6 @@ Game::Game()
       playerCamera(player.Camera) {
     window.setFramerateLimit(144);
     playerCamera.setSize(sf::Vector2f(window.getSize()));
-
     // Load font
     font.loadFromFile("resources/WorkSans-Regular.ttf");
 

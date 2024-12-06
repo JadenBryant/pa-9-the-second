@@ -13,7 +13,7 @@
 
 class Game {
 public:
-    Game();
+    Game(sf::RenderWindow &window);
     void run();
 
 private:
@@ -21,7 +21,7 @@ private:
     void update();
     void render();
 
-    sf::RenderWindow window;
+    sf::RenderWindow &window;
     bool isGameOver;
     int timeToComplete;
     int timeRemaining;

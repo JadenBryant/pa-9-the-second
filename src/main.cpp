@@ -10,14 +10,14 @@ int main() {
     bool showMainMenu = true;
 
     while (window.isOpen()) {
-        if (showMainMenu) {
-            for (sf::Event event; window.pollEvent(event);) {
-                if (event.type == sf::Event::Closed) {
-                    window.close();
-                }
-                menu.handleInput(event);
+        for (sf::Event event; window.pollEvent(event);) {
+            if (event.type == sf::Event::Closed) {
+                window.close();
             }
+            menu.handleInput(event);
+        }
 
+        if (showMainMenu) {
             window.clear();
             menu.draw();
             window.display();
@@ -26,7 +26,7 @@ int main() {
                 showMainMenu = false;
             }
         } else {
-            Game game;
+            Game game(window);
             game.run();
             window.close();
         }
