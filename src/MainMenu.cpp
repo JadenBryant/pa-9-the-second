@@ -6,7 +6,9 @@
 #include <iostream>
 
 MainMenu::MainMenu(sf::RenderWindow& window) : window(window), selectedItemIndex(0), gameStart(false) {
-    font.loadFromFile("resources/WorkSans-Regular.ttf");
+    titleFont.loadFromFile("resources/ShadowHand.ttf");
+    font1.loadFromFile("resources/Grandstander-regular.ttf");
+    font2.loadFromFile("resources/WorkSans-Regular.ttf");
     initMenu();
 }
 
@@ -17,7 +19,7 @@ void MainMenu::initMenu() {
 
     for (int i = 0; i < items.size(); i++) {
         sf::Text text;
-        text.setFont(font);
+        text.setFont(font1);
         text.setString(items[i]);
         text.setCharacterSize(40);
         text.setFillColor(sf::Color::White);
@@ -27,7 +29,7 @@ void MainMenu::initMenu() {
     }
 
     sf::Text title;
-    title.setFont(font);
+    title.setFont(titleFont);
     title.setString("Platformer Game");
     title.setCharacterSize(60);
     title.setFillColor(sf::Color::White);
@@ -35,7 +37,7 @@ void MainMenu::initMenu() {
     menuItems.insert(menuItems.begin(), title);
 
     sf::Text instructions;
-    instructions.setFont(font);
+    instructions.setFont(font2);
     instructions.setString("Use arrow keys to move, reach the flag to win!");
     instructions.setCharacterSize(25);
     instructions.setFillColor(sf::Color::White);

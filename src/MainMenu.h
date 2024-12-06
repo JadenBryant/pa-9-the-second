@@ -21,7 +21,9 @@ private:
     bool isMouseOverItem(const sf::Text& text) const;
 
     sf::RenderWindow& window;
-    sf::Font font;
+    sf::Font titleFont;
+    sf::Font font1;
+    sf::Font font2;
     std::vector<sf::Text> menuItems;
     int selectedItemIndex;
     bool gameStart;
