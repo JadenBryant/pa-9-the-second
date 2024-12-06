@@ -5,7 +5,7 @@
 #include "MainMenu.h"
 #include <iostream>
 
-MainMenu::MainMenu(sf::RenderWindow& window) : window(window), selectedItemIndex(0) {
+MainMenu::MainMenu(sf::RenderWindow& window) : window(window), selectedItemIndex(0), gameStart(false) {
     font.loadFromFile("resources/WorkSans-Regular.ttf");
     initMenu();
 }
@@ -37,14 +37,12 @@ void MainMenu::initMenu() {
 
 void MainMenu::centerText(sf::Text& text, float yPosition) {
     sf::FloatRect textRect = text.getLocalBounds();
-    text.setOrigin(textRect.left + textRect.width/2.0f,
-                   textRect.top + textRect.height/2.0f);
-    text.setPosition(window.getSize().x/2.0f, yPosition);
+    text.setOrigin(textRect.left + textRect.width / 2.0f,
+                   textRect.top + textRect.height / 2.0f);
+    text.setPosition(window.getSize().x / 2.0f, yPosition);
 }
 
 void MainMenu::draw() {
-
-
     for (int i = 0; i < menuItems.size(); i++) {
         if (i > 0) {
             if (i - 1 == selectedItemIndex || isMouseOverItem(menuItems[i])) {
@@ -89,7 +87,7 @@ void MainMenu::handleInput(const sf::Event& event) {
             case sf::Keyboard::Return:
                 switch (selectedItemIndex) {
                     case 0:
-                        std::cout << "Starting game..." << std::endl;
+                        gameStart = true;
                         break;
                     case 1:
                         std::cout << "Opening options..." << std::endl;
@@ -123,9 +121,9 @@ void MainMenu::handleInput(const sf::Event& event) {
     }
 }
 
-#include <SFML/Graphics.hpp>
-#include "MainMenu.h"
-
+bool MainMenu::startGame() const {
+    return gameStart;
+}
 
 
 /*

@@ -5,30 +5,28 @@
 #ifndef MAINMENU_H
 #define MAINMENU_H
 
-
 #include <SFML/Graphics.hpp>
 #include <vector>
-#include <memory>
 
 class MainMenu {
+public:
+    MainMenu(sf::RenderWindow& window);
+    void draw();
+    void handleInput(const sf::Event& event);
+    bool startGame() const;
+
 private:
+    void initMenu();
+    void centerText(sf::Text& text, float yPosition);
+    void moveUp();
+    void moveDown();
+    bool isMouseOverItem(const sf::Text& text) const;
+
     sf::RenderWindow& window;
     sf::Font font;
     std::vector<sf::Text> menuItems;
     int selectedItemIndex;
-
-    void initMenu();
-    void centerText(sf::Text& text, float yPosition);
-
-public:
-    MainMenu(sf::RenderWindow& window);
-    void draw();
-    void moveUp();
-    void moveDown();
-    int getSelectedItem() const { return selectedItemIndex; }
-    void handleInput(const sf::Event& event);
-    bool isMouseOverItem(const sf::Text& text) const;
+    bool gameStart;
 };
 
-
-#endif //MAINMENU_H
+#endif // MAINMENU_H
