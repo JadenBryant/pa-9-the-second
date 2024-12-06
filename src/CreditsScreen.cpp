@@ -11,7 +11,7 @@ CreditsScreen::CreditsScreen(sf::RenderWindow& window) : window(window), backToM
 }
 
 void CreditsScreen::initCredits() {
-    const std::vector<std::string> items = {"Graphics: Jaden Bryant", "Physics: Daniel Bereza", "Level Design: Jackson Lusk", "Menus: Tim Xu"};
+    const std::vector<std::string> items = {"Graphics: Jaden Bryant", "Physics: Daniel Bereza", "Level Design: Jackson Lusk", "Menus & Misc: Tim Xu", "Background Sprites: Gemini Imagen3"};
     float yOffSet = 350.0f;
     float spacing = 50.0f;
 
