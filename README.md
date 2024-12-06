@@ -1,3 +1,12 @@
+## PA9 for WSU CPT122 clas
+Made by students in Lab Section 9
+* Daniel Bereza
+* Tim Xu
+* Jaden Bryant
+* Jackson Lusk
+
+Control with arrow keys and try to finish the platforming as fast as you can
+
 # CMake SFML Project Template
 
 This repository template should allow for a fast and hassle-free kick start of your next SFML project using CMake.
