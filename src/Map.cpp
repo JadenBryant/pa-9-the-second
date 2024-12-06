@@ -6,6 +6,7 @@
 
 #include <iostream>
 
+#include "blocks/DisappearingBlock.h"
 #include "blocks/FinishBlock.h"
 #include "SFML/Graphics/Texture.hpp"
 
@@ -74,6 +75,9 @@ bool Map::loadMap(const sf::Vector2u& windowSize) {
             } else if (blockType == "FinishBlock") {
                 this->blocks.push_back(new FinishBlock(blockPosition.x, blockPosition.y));
                 std::cout << "Block at position " << x << "," << y << " pushed to map vector" << std::endl;
+            }else if (blockType == "DisappearingBlock") {
+                this->blocks.push_back(new DisappearingBlock(blockPosition.x, blockPosition.y));
+                std::cout<<"Block at position " << x << "," << y << " pushed to map vector" << std::endl;
             }
         }
     }

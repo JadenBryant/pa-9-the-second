@@ -9,6 +9,7 @@
 
 
 class DisappearingBlock : public Block{
+public:
     explicit DisappearingBlock(sf::Vector2f position);
     DisappearingBlock(int x, int y);
     void onTouch(Player& whoTouched) override;
