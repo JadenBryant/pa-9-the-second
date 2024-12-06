@@ -14,7 +14,7 @@ int main()
 
     // ATTRIBUTES
     bool gameOver = false;
-    int timeToComplete = 5;
+    int timeToComplete = 10;
     int timeRemaining = 999;
     sf::Clock gameClock;
     sf::Clock clock;
@@ -34,8 +34,24 @@ int main()
     // GUIS
     sf::Font font;
     font.loadFromFile("resources/WorkSans-Regular.ttf");
+
     sf::Text clockGui;
     clockGui.setFont(font);
+
+    sf::RectangleShape gameOverModal;
+    sf::Text gameOverText;
+
+    gameOverModal.setOutlineThickness(3);
+    gameOverModal.setOutlineColor(sf::Color::Black);
+    gameOverModal.setSize(sf::Vector2f(window.getSize().x / 3, window.getSize().y / 3));
+    gameOverModal.setOrigin(gameOverModal.getSize().x / 2, gameOverModal.getSize().y / 2);
+    gameOverModal.setPosition(sf::Vector2f(window.getSize().x / 2, window.getSize().y / 2));
+
+    gameOverText.setFont(font);
+    gameOverText.setColor(sf::Color::Black);
+    gameOverText.setString("Game over!");
+    gameOverText.setOrigin(gameOverText.getLocalBounds().width / 2, gameOverText.getLocalBounds().height / 2);
+    gameOverText.setPosition(sf::Vector2f(window.getSize().x / 2, window.getSize().y / 2));
 
     // GAME WINDOW
     while (window.isOpen())
@@ -81,6 +97,10 @@ int main()
         // DRAW GUI
         window.setView(window.getDefaultView());
         window.draw(clockGui);
+        if (gameOver) {
+            window.draw(gameOverModal);
+            window.draw(gameOverText);
+        }
 
         window.display();
     }
