@@ -35,10 +35,10 @@ bool Map::applyBlockTextures() {
     bool success = true;
 
     for (int i = 0; i < this->blocks.size(); i++) {
-        if (blocks[i].Type == "Block") {
-            blocks[i].setTexture(this->blockTextures[0]);
-        } else if (blocks[i].Type == "FinishBlock") {
-            blocks[i].setTexture(this->blockTextures[1]);
+        if (blocks[i]->Type == "Block") {
+            blocks[i]->setTexture(this->blockTextures[0]);
+        } else if (blocks[i]->Type == "FinishBlock") {
+            blocks[i]->setTexture(this->blockTextures[1]);
         }
     }
 
@@ -69,10 +69,10 @@ bool Map::loadMap(const sf::Vector2u& windowSize) {
             sf::Vector2f blockPosition(std::stoi(x) * 50, (windowSize.y - 50) - (std::stoi(y) * 50));
 
             if (blockType == "Block") {
-                this->blocks.emplace_back(blockPosition.x, blockPosition.y);
+                this->blocks.emplace_back(new Block(blockPosition.x, blockPosition.y));
                 // std::cout << "Block at position " << x << "," << y << " pushed to map vector" << std::endl;
             } else if (blockType == "FinishBlock") {
-                this->blocks.push_back(FinishBlock(blockPosition.x, blockPosition.y));
+                this->blocks.push_back(new FinishBlock(blockPosition.x, blockPosition.y));
                 std::cout << "Block at position " << x << "," << y << " pushed to map vector" << std::endl;
             }
         }

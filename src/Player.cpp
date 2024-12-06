@@ -1,7 +1,7 @@
 #include "Player.h"
 #include <iostream>
 
-Player::Player(std::vector<Block> *blocks) {
+Player::Player(std::vector<Block*> *blocks) {
     if (!texture.loadFromFile("resources/player.png")) {
         std::cerr << "Failed to load texture" << std::endl;
     }
@@ -41,10 +41,10 @@ void Player::updatePhysics(sf::Time time) {
 
     bool falling = true;
     for (auto &block : *blocks) {
-        auto blockBounds = block.getGlobalBounds();
+        auto blockBounds = block->getGlobalBounds();
         sf::Vector2f testPoint1(position.x + 30, position.y + texture.getSize().y / 2 + 2);
         sf::Vector2f testPoint2(position.x - 30, position.y + texture.getSize().y / 2 + 2);
-        if (block.getGlobalBounds().contains(testPoint1) || block.getGlobalBounds().contains(testPoint2)) {
+        if (block->getGlobalBounds().contains(testPoint1) || block->getGlobalBounds().contains(testPoint2)) {
             falling = false;
             break;
         }
@@ -67,14 +67,14 @@ void Player::updatePhysics(sf::Time time) {
 
     auto playerBounds = getGlobalBounds();
     for (auto &block : *blocks) {
-        auto blockBounds = block.getGlobalBounds();
+        auto blockBounds = block->getGlobalBounds();
         // std::cout << "Player test" << blockBounds.width << " " << blockBounds.height << " " << blockBounds.getPosition().x << " "<<  blockBounds.getPosition().y << std::endl;
-        if (block.getGlobalBounds().intersects(playerBounds)) {
-            if (block.isCollidable) {
+        if (block->getGlobalBounds().intersects(playerBounds)) {
+            if (block->isCollidable) {
                 velocity.y = 0;
                 setPosition(position.x, position.y - 1);
             }
-            block.onTouch(*this);
+            block->onTouch(*this);
             break;
             // std::cout << "Player collision: " << position.y << " " << dt << " " << position.y + dy << std::endl;
         }

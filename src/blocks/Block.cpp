@@ -25,3 +25,5 @@ Block::Block(int x, int y) {
 
     this->Type = "Block";
 }
+
+void Block::onTouch(Player &whoTouched) {}

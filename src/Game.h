@@ -28,7 +28,7 @@ private:
     sf::Clock gameClock;
     sf::Clock clock;
     Map gameMap;
-    std::vector<Block> blocks;
+    std::vector<Block*> *blocks;
     Player player;
     sf::View playerCamera;
     sf::Font font;

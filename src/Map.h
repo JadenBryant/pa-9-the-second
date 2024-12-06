@@ -16,7 +16,7 @@ public:
     bool applyBlockTextures();
 
     std::vector<sf::Texture*> blockTextures;
-    std::vector<Block> blocks;
+    std::vector<Block*> blocks;
 private:
     bool loadMap(const sf::Vector2u& windowSize);
 };

@@ -10,8 +10,8 @@ Game::Game(sf::RenderWindow &window)
       timeToComplete(60),
       timeRemaining(999),
       gameMap(window.getSize()),
-      blocks(gameMap.blocks),
-      player(&blocks),
+      blocks(&gameMap.blocks),
+      player(blocks),
       playerCamera(player.Camera) {
     window.setFramerateLimit(144);
     playerCamera.setSize(sf::Vector2f(window.getSize()));
@@ -72,8 +72,8 @@ void Game::render() {
 
     // DRAW WORLD
     window.setView(playerCamera);
-    for (const auto& block : blocks) {
-        window.draw(block);
+    for (const auto block : *blocks) {
+        window.draw(*block);
     }
     window.draw(player);
 

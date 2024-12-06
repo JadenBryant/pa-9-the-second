@@ -6,7 +6,7 @@
 
 class Player : public sf::Sprite{
 public:
-    Player(std::vector<Block> *blocks);
+    Player(std::vector<Block*> *blocks);
     ~Player()= default;
     void updatePhysics(sf::Time time);
 
@@ -18,5 +18,5 @@ private:
     int walkSpeed;
     sf::Vector2f velocity;
     sf::Texture texture;
-    std::vector<Block> *blocks;
+    std::vector<Block*> *blocks;
 };
