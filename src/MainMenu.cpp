@@ -7,7 +7,7 @@
 
 MainMenu::MainMenu(sf::RenderWindow& window) : window(window), selectedItemIndex(0), gameStart(false) {
     titleFont.loadFromFile("resources/Gluten-Bold.ttf");
-    font1.loadFromFile("resources/Grandstander-regular.ttf");
+    font1.loadFromFile("resources/Grandstander-Regular.ttf");
     font2.loadFromFile("resources/WorkSans-Regular.ttf");
     initMenu();
 }
