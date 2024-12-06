@@ -23,7 +23,9 @@ add_executable(main src/main.cpp
         src/MainMenu.h
         src/MainMenu.cpp
         src/blocks/FinishBlock.cpp
-        src/blocks/FinishBlock.h)
+        src/blocks/FinishBlock.h
+        src/Map.cpp
+        src/Map.h)
 target_link_libraries(main PRIVATE sfml-graphics)
 target_compile_features(main PRIVATE cxx_std_17)
 
