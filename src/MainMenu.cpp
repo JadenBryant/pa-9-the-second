@@ -4,8 +4,9 @@
 
 #include "MainMenu.h"
 #include <iostream>
+#include "CreditsScreen.h"
 
-MainMenu::MainMenu(sf::RenderWindow& window) : window(window), selectedItemIndex(0), gameStart(false) {
+MainMenu::MainMenu(sf::RenderWindow& window) : window(window), selectedItemIndex(0), gameStart(false), credits(false) {
     titleFont.loadFromFile("resources/Gluten-Bold.ttf");
     font1.loadFromFile("resources/Grandstander-Regular.ttf");
     font2.loadFromFile("resources/WorkSans-Regular.ttf");
@@ -95,7 +96,7 @@ void MainMenu::handleInput(const sf::Event& event) {
                         std::cout << "Opening options..." << std::endl;
                         break;
                     case 2:
-                        std::cout << "Showing credits..." << std::endl;
+                        credits = true;
                         break;
                     case 3:
                         window.close();
@@ -126,6 +127,11 @@ void MainMenu::handleInput(const sf::Event& event) {
 bool MainMenu::startGame() const {
     return gameStart;
 }
+
+bool MainMenu::showCredits() const {
+    return credits;
+}
+
 
 
 /*

@@ -1,12 +1,15 @@
 #include <SFML/Graphics.hpp>
 #include "MainMenu.h"
 #include "Game.h"
+#include "CreditsScreen.h"
 
 int main() {
     sf::RenderWindow window(sf::VideoMode(1920, 1080), "Racing Game");
     window.setFramerateLimit(144);
 
-    MainMenu menu(window);
+    MainMenu* menu = new MainMenu(window);
+    CreditsScreen credits(window);
+
     bool showMainMenu = true;
 
     while (window.isOpen()) {
@@ -14,19 +17,29 @@ int main() {
             if (event.type == sf::Event::Closed) {
                 window.close();
             }
-            if (showMainMenu) {
-                menu.handleInput(event);
+            if (menu->showCredits()) {
+                credits.handleInput(event);
+                if (credits.returnToMenu()) {
+                    delete menu;
+                    menu = new MainMenu(window);
+                }
+            } else {
+                menu->handleInput(event);
             }
         }
 
         if (showMainMenu) {
             window.clear();
-            menu.draw();
-            // window.display();
+            if (menu->showCredits()) {
+                credits.draw();
+            } else {
+                menu->draw();
+            }
 
-            if (menu.startGame()) {
+            if (menu->startGame()) {
                 showMainMenu = false;
             }
+
         } else {
             Game game(window);
             game.run();
@@ -34,5 +47,6 @@ int main() {
         }
     }
 
+    delete menu;
     return 0;
 }

@@ -14,6 +14,7 @@ public:
     void draw();
     void handleInput(const sf::Event& event);
     bool startGame() const;
+    bool showCredits() const;
 
 private:
     void initMenu();
@@ -27,6 +28,7 @@ private:
     std::vector<sf::Text> menuItems;
     int selectedItemIndex;
     bool gameStart;
+    bool credits;
 };
 
 #endif // MAINMENU_H
