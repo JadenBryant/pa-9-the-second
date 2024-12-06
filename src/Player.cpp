@@ -55,7 +55,7 @@ void Player::updatePhysics(sf::Time time) {
 
     float dx = velocity.x * dt;
     float dy = velocity.y * dt;
-    std::cout << "Player physics: " << position.y << " " << dt << " " << position.y + dg << std::endl;
+    // std::cout << "Player physics: " << position.y << " " << dt << " " << position.y + dg << std::endl;
     if (falling) {
 
         dy += dg;
