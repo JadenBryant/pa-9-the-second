@@ -6,7 +6,7 @@
 #include <iostream>
 
 MainMenu::MainMenu(sf::RenderWindow& window) : window(window), selectedItemIndex(0), gameStart(false) {
-    titleFont.loadFromFile("resources/ShadowHand.ttf");
+    titleFont.loadFromFile("resources/Gluten-Bold.ttf");
     font1.loadFromFile("resources/Grandstander-regular.ttf");
     font2.loadFromFile("resources/WorkSans-Regular.ttf");
     initMenu();
@@ -29,11 +29,11 @@ void MainMenu::initMenu() {
     }
 
     sf::Text title;
-    title.setFont(titleFont);
+    title.setFont(font1);
     title.setString("Platformer Game");
-    title.setCharacterSize(60);
+    title.setCharacterSize(120);
     title.setFillColor(sf::Color::White);
-    centerText(title, 300.0f);
+    centerText(title, 270.0f);
     menuItems.insert(menuItems.begin(), title);
 
     sf::Text instructions;
