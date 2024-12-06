@@ -13,6 +13,7 @@ public:
     void run();
     void update();
     void draw();
+    void returnToMainMenu();
 
 private:
     void processEvents();
@@ -33,6 +34,7 @@ private:
     sf::Font font;
     sf::Text clockGui;
     sf::RectangleShape gameOverModal;
+    sf::Text returnToMenuText;
     sf::Text gameOverText;
 };
 

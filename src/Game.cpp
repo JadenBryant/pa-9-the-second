@@ -3,6 +3,9 @@
 //
 
 #include "Game.h"
+#include "MainMenu.h"
+#include "CreditsScreen.h"
+#include "blocks/KillBlock.h"
 
 Game::Game(sf::RenderWindow &window)
     : window(window),
@@ -29,7 +32,7 @@ Game::Game(sf::RenderWindow &window)
     window.setFramerateLimit(144);
     playerCamera.setSize(sf::Vector2f(window.getSize()));
     // Load font
-    font.loadFromFile("resources/WorkSans-Regular.ttf");
+    font.loadFromFile("resources/Grandstander-Regular.ttf");
 
     // Initialize GUI elements
     clockGui.setFont(font);
@@ -44,7 +47,13 @@ Game::Game(sf::RenderWindow &window)
     gameOverText.setFillColor(sf::Color::Black);
     gameOverText.setString("Game over!");
     gameOverText.setOrigin(gameOverText.getLocalBounds().width / 2, gameOverText.getLocalBounds().height / 2);
-    gameOverText.setPosition(sf::Vector2f(window.getSize().x / 2, window.getSize().y / 2));
+    gameOverText.setPosition(sf::Vector2f(window.getSize().x / 2, (window.getSize().y / 2) - 65));
+
+    returnToMenuText.setFont(font);
+    returnToMenuText.setFillColor(sf::Color::Black);
+    returnToMenuText.setString("Return to Main Menu");
+    returnToMenuText.setOrigin(returnToMenuText.getLocalBounds().width / 2, returnToMenuText.getLocalBounds().height / 2);
+    returnToMenuText.setPosition(sf::Vector2f(window.getSize().x / 2, (window.getSize().y / 2) + 25));
 }
 
 void Game::run() {
@@ -60,9 +69,26 @@ void Game::processEvents() {
         if (event.type == sf::Event::Closed) {
             window.close();
         }
+        if (isGameOver) {
+            if (event.type == sf::Event::MouseMoved) {
+                sf::Vector2i mousePos = sf::Mouse::getPosition(window);
+                sf::Vector2f pos = window.mapPixelToCoords(mousePos);
+                if (returnToMenuText.getGlobalBounds().contains(pos)) {
+                    returnToMenuText.setFillColor(sf::Color::Yellow);
+                } else {
+                    returnToMenuText.setFillColor(sf::Color::Black);
+                }
+            }
+            if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left) {
+                sf::Vector2i mousePosition = sf::Mouse::getPosition(window);
+                sf::Vector2f worldPos = window.mapPixelToCoords(mousePosition);
+                if (returnToMenuText.getGlobalBounds().contains(worldPos)) {
+                    returnToMainMenu();
+                }
+            }
+        }
     }
 }
-
 void Game::update() {
     // ATTRIBUTES
     int timeRunningInSeconds = static_cast<int>(gameClock.getElapsedTime().asSeconds());
@@ -80,9 +106,14 @@ void Game::update() {
     playerCamera.setCenter(sf::Vector2f(player.getPosition().x, player.getPosition().y));
 
     // BACKGROUND SCROLLING
-    float scrollFactor = 0.0001f; // Adjust this factor to make the background scroll slower
+    float scrollFactor = 0.0001f;
     for (auto& backgroundSprite : backgroundSprites) {
         backgroundSprite.setPosition(-player.getPosition().x * scrollFactor + backgroundSprite.getPosition().x, 0);
+    }
+
+    // FAL OF THE NAP
+    if (player.getPosition().y > 1500) {
+        isGameOver = true;
     }
 }
 
@@ -102,6 +133,12 @@ void Game::render() {
                 finishBlock->isGameOver = &isGameOver;
             }
         }
+        if ((*block).Type == "KillBlock") {
+            auto killBlock = dynamic_cast<KillBlock*>(block);
+            if (killBlock) {
+                killBlock->isGameOver = &isGameOver;
+            }
+        }
     }
     window.draw(player);
 
@@ -118,8 +155,54 @@ void Game::render() {
     if (isGameOver) {
         window.draw(gameOverModal);
         window.draw(gameOverText);
+        window.draw(returnToMenuText);
         player.setWalkSpeed(0);
     }
 
     window.display();
+}
+
+void Game::returnToMainMenu() {
+
+    MainMenu* menu = new MainMenu(window);
+    CreditsScreen credits(window);
+
+    bool showMainMenu = true;
+
+    while (window.isOpen()) {
+        for (sf::Event event; window.pollEvent(event);) {
+            if (event.type == sf::Event::Closed) {
+                window.close();
+            }
+            if (menu->showCredits()) {
+                credits.handleInput(event);
+                if (credits.returnToMenu()) {
+                    delete menu;
+                    menu = new MainMenu(window);
+                }
+            } else {
+                menu->handleInput(event);
+            }
+        }
+
+        if (showMainMenu) {
+            window.clear();
+            if (menu->showCredits()) {
+                credits.draw();
+            } else {
+                menu->draw();
+            }
+
+            if (menu->startGame()) {
+                showMainMenu = false;
+            }
+
+        } else {
+            Game game(window);
+            game.run();
+            window.close();
+        }
+    }
+    delete menu;
+    window.close();
 }
