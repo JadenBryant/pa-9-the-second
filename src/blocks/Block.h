@@ -1,4 +1,6 @@
 #pragma once
+#include <string>
+
 #include "SFML/Graphics/RectangleShape.hpp"
 #include "SFML/Graphics/Sprite.hpp"
 // #include "../Player.h"
@@ -11,4 +13,5 @@ public:
     Block(int x, int y);
     virtual void onTouch(Player& whoTouched) {}
     bool isCollidable;
+    std::string Type;
 };

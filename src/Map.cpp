@@ -4,9 +4,45 @@
 
 #include "Map.h"
 
+#include <iostream>
+
+#include "blocks/FinishBlock.h"
+#include "SFML/Graphics/Texture.hpp"
+
+using sf::Texture;
+
 Map::Map(const sf::Vector2u& windowSize) {
     this->loadMap(windowSize);
-    //this->loadBlockTextures();
+    this->loadBlockTextures();
+    this->applyBlockTextures();
+}
+
+bool Map::loadBlockTextures() {
+    bool success = true;
+
+    const auto blockTexture = new Texture();
+    blockTexture->loadFromFile("resources/blocks/Block.png");
+    this->blockTextures.push_back(blockTexture);
+
+    const auto finishBlockTexture = new Texture();
+    finishBlockTexture->loadFromFile("resources/blocks/FinishBlock.png");
+    this->blockTextures.push_back(finishBlockTexture);
+
+    return success;
+}
+
+bool Map::applyBlockTextures() {
+    bool success = true;
+
+    for (int i = 0; i < this->blocks.size(); i++) {
+        if (blocks[i].Type == "Block") {
+            blocks[i].setTexture(this->blockTextures[0]);
+        } else if (blocks[i].Type == "FinishBlock") {
+            blocks[i].setTexture(this->blockTextures[1]);
+        }
+    }
+
+    return success;
 }
 
 bool Map::loadMap(const sf::Vector2u& windowSize) {
@@ -32,13 +68,13 @@ bool Map::loadMap(const sf::Vector2u& windowSize) {
 
             sf::Vector2f blockPosition(std::stoi(x) * 50, (windowSize.y - 50) - (std::stoi(y) * 50));
 
-            if (blockType == "basicBlock") {
+            if (blockType == "Block") {
                 this->blocks.emplace_back(blockPosition.x, blockPosition.y);
                 // std::cout << "Block at position " << x << "," << y << " pushed to map vector" << std::endl;
+            } else if (blockType == "FinishBlock") {
+                this->blocks.push_back(FinishBlock(blockPosition.x, blockPosition.y));
+                std::cout << "Block at position " << x << "," << y << " pushed to map vector" << std::endl;
             }
-            // } else if (blockType == "finishBlock") {
-            //     map.push_back(FinishBlock(blockPosition.x, blockPosition.y));
-            // }
         }
     }
 

@@ -6,7 +6,9 @@
 #include "Block.h"
 
 class FinishBlock : public Block {
+public:
     explicit FinishBlock(sf::Vector2f position);
     FinishBlock(int x, int y);
-    void onTouch(Player& whoTouched) override;
+
+    static void onTouch(bool& isGameOver, Player& whoTouched);
 };

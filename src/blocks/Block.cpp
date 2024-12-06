@@ -5,19 +5,18 @@
 #include "Block.h"
 #include <random>
 
-std::random_device rd;
-std::mt19937 gen(rd());
-std::uniform_int_distribution<> dis(0, 255);
-
 Block::Block(sf::Vector2f position) {
     this->setSize(sf::Vector2f(50.f, 50.f));
-    this->setFillColor(sf::Color(dis(gen), dis(gen), dis(gen)));
+    this->setFillColor(sf::Color(240, 240, 240));
     this->setPosition(position);
+
+    this->Type = "Block";
 };
 
 Block::Block(int x, int y) {
     setSize(sf::Vector2f(50.f, 50.f));
-    setFillColor(sf::Color(dis(gen), dis(gen), dis(gen)));
+    this->setFillColor(sf::Color(240, 240, 240));
     setPosition(x, y);
-    isCollidable = true;
+
+    this->Type = "Block";
 }

@@ -12,9 +12,10 @@
 class Map {
 public:
     Map(const sf::Vector2u& windowSize);
-    //bool loadBlockTextures();
+    bool loadBlockTextures();
+    bool applyBlockTextures();
 
-    //std::vector<sf::Texture> blockTextures;
+    std::vector<sf::Texture*> blockTextures;
     std::vector<Block> blocks;
 private:
     bool loadMap(const sf::Vector2u& windowSize);

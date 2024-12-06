@@ -12,11 +12,14 @@ Player::Player(std::vector<Block> *blocks) {
 
     // CAMERA CODE
     this->Camera.setCenter(this->getPosition());
+
+    // ATTRIBUTES
+    this->walkSpeed = 3;
 }
 
 void Player::updatePhysics(sf::Time time) {
     auto position = getPosition();
-    float moveSpeed = 200.0f, jumpSpeed = 500.0f;
+    float moveSpeed = (this->walkSpeed * 100.0f), jumpSpeed = 500.0f;
     float dt = time.asSeconds();
     float dg = 200 * dt;
 
@@ -77,3 +80,12 @@ void Player::updatePhysics(sf::Time time) {
         }
     }
 }
+
+const int Player::getWalkSpeed() {
+    return this->walkSpeed;
+}
+
+void Player::setWalkSpeed(int walkSpeed) {
+    this->walkSpeed = walkSpeed;
+}
+

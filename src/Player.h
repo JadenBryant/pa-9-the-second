@@ -10,8 +10,12 @@ public:
     ~Player()= default;
     void updatePhysics(sf::Time time);
 
+    const int getWalkSpeed();
+    void setWalkSpeed(int walkSpeed);
+
     sf::View Camera;
 private:
+    int walkSpeed;
     sf::Vector2f velocity;
     sf::Texture texture;
     std::vector<Block> *blocks;

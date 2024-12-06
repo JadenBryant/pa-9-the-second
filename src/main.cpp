@@ -16,8 +16,8 @@ int main()
 
 
     // ATTRIBUTES
-    bool gameOver = false;
-    int timeToComplete = 10;
+    bool isGameOver = false;
+    int timeToComplete = 60;
     int timeRemaining = 999;
     sf::Clock gameClock;
     sf::Clock clock;
@@ -69,7 +69,7 @@ int main()
         if (timeRemaining > 0) {
             timeRemaining = timeToComplete - timeRunningInSeconds;
         } else {
-            gameOver = true;
+            isGameOver = true;
         }
 
         // GUI CODE
@@ -96,7 +96,7 @@ int main()
         window.setView(window.getDefaultView());
         window.draw(clockGui);
 
-        if (gameOver) {
+        if (isGameOver) {
             window.draw(gameOverModal);
             window.draw(gameOverText);
         }
