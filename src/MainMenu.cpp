@@ -37,10 +37,10 @@ void MainMenu::initMenu() {
     sf::Text instructions;
     instructions.setFont(font);
     instructions.setString("Use arrow keys to move, reach the flag to win!");
-    instructions.setCharacterSize(20);
+    instructions.setCharacterSize(25);
     instructions.setFillColor(sf::Color::White);
-    centerText(instructions, 750.0f);
-    menuItems.insert(menuItems.begin(), instructions);
+    centerText(instructions, 725.0f);
+    menuItems.push_back(instructions);
 }
 
 void MainMenu::centerText(sf::Text& text, float yPosition) {
@@ -107,7 +107,7 @@ void MainMenu::handleInput(const sf::Event& event) {
 
     if (event.type == sf::Event::MouseButtonPressed) {
         if (event.mouseButton.button == sf::Mouse::Left) {
-            for (size_t i = 1; i < menuItems.size(); i++) {
+            for (int i = 1; i < menuItems.size(); i++) {
                 if (isMouseOverItem(menuItems[i])) {
                     selectedItemIndex = i - 1;
 
