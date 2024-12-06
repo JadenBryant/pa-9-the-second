@@ -11,5 +11,5 @@ public:
     FinishBlock(int x, int y);
 
     void onTouch(Player& whoTouched) override;
-    bool* isGameOver;
+    bool* isGameOver; // receives pointer to attribute from Game class to update game state
 };
