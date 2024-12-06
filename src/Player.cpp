@@ -14,9 +14,11 @@ Player::Player(std::vector<Block*> *blocks) {
     this->Camera.setCenter(this->getPosition());
 
     // ATTRIBUTES
-    this->walkSpeed = 3;
+    this->walkSpeed = 10;
 }
 
+// run every frame to manage physics, since player is the only thing moving
+// physics kinda only revolves around it
 void Player::updatePhysics(sf::Time time) {
     auto position = getPosition();
     float moveSpeed = (this->walkSpeed * 100.0f), jumpSpeed = 400.0f;
@@ -35,6 +37,7 @@ void Player::updatePhysics(sf::Time time) {
         velocity.x = 0;
     }
 
+    // vertical stuff
     velocity.y += dg;
     if (velocity.y > 0)
         velocity.y = 0;
@@ -56,6 +59,7 @@ void Player::updatePhysics(sf::Time time) {
         velocity.y = -jumpSpeed;
     }
 
+    // use the dt to calculate our movement amount so we move a constant amount per time
     float dx = velocity.x * dt;
     float dy = velocity.y * dt;
     // std::cout << "Player physics: " << position.y << " " << dt << " " << position.y + dg << std::endl;
