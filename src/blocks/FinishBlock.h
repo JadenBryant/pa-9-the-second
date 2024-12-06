@@ -11,4 +11,5 @@ public:
     FinishBlock(int x, int y);
 
     void onTouch(Player& whoTouched) override;
+    bool* isGameOver;
 };

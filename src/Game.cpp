@@ -23,7 +23,7 @@ Game::Game(sf::RenderWindow &window)
 
     gameOverModal.setOutlineThickness(3);
     gameOverModal.setOutlineColor(sf::Color::Black);
-    gameOverModal.setSize(sf::Vector2f(window.getSize().x / 3, window.getSize().y / 3));
+    gameOverModal.setSize(sf::Vector2f(window.getSize().x / 4, window.getSize().y / 4));
     gameOverModal.setOrigin(gameOverModal.getSize().x / 2, gameOverModal.getSize().y / 2);
     gameOverModal.setPosition(sf::Vector2f(window.getSize().x / 2, window.getSize().y / 2));
 
@@ -53,7 +53,7 @@ void Game::processEvents() {
 void Game::update() {
     // ATTRIBUTES
     int timeRunningInSeconds = static_cast<int>(gameClock.getElapsedTime().asSeconds());
-    if (timeRemaining > 0) {
+    if (timeRemaining > 0 && isGameOver == false) {
         timeRemaining = timeToComplete - timeRunningInSeconds;
     } else {
         isGameOver = true;
@@ -74,6 +74,12 @@ void Game::render() {
     window.setView(playerCamera);
     for (const auto block : *blocks) {
         window.draw(*block);
+        if ((*block).Type == "FinishBlock") {
+            auto finishBlock = dynamic_cast<FinishBlock*>(block);
+            if (finishBlock) {
+                finishBlock->isGameOver = &isGameOver;
+            }
+        }
     }
     window.draw(player);
 
@@ -90,6 +96,7 @@ void Game::render() {
     if (isGameOver) {
         window.draw(gameOverModal);
         window.draw(gameOverText);
+        player.setWalkSpeed(0);
     }
 
     window.display();
