@@ -16,7 +16,8 @@ Block::Block(sf::Vector2f position) {
 };
 
 Block::Block(int x, int y) {
-    this->setSize(sf::Vector2f(50.f, 50.f));
-    this->setFillColor(sf::Color(dis(gen), dis(gen), dis(gen)));
-    this->setPosition(x, y);
+    setSize(sf::Vector2f(50.f, 50.f));
+    setFillColor(sf::Color(dis(gen), dis(gen), dis(gen)));
+    setPosition(x, y);
+    isCollidable = true;
 }

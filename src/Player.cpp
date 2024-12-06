@@ -60,19 +60,20 @@ void Player::updatePhysics(sf::Time time) {
 
         dy += dg;
     }
-    this->setPosition(position.x + dx, position.y + dy);
+    setPosition(position.x + dx, position.y + dy);
 
     auto playerBounds = getGlobalBounds();
     for (auto &block : *blocks) {
         auto blockBounds = block.getGlobalBounds();
         // std::cout << "Player test" << blockBounds.width << " " << blockBounds.height << " " << blockBounds.getPosition().x << " "<<  blockBounds.getPosition().y << std::endl;
         if (block.getGlobalBounds().intersects(playerBounds)) {
-            velocity.y = 0;
-            this->setPosition(position.x, position.y - 1);
+            if (block.isCollidable) {
+                velocity.y = 0;
+                setPosition(position.x, position.y - 1);
+            }
+            block.onTouch(*this);
             break;
             // std::cout << "Player collision: " << position.y << " " << dt << " " << position.y + dy << std::endl;
         }
     }
-
-
 }

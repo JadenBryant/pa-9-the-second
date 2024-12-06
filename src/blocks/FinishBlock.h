@@ -8,5 +8,5 @@
 class FinishBlock : public Block {
     explicit FinishBlock(sf::Vector2f position);
     FinishBlock(int x, int y);
-    //void onTouch(Player& whoTouched) override;
+    void onTouch(Player& whoTouched) override;
 };
