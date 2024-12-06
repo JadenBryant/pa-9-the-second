@@ -4,13 +4,18 @@
 
 #pragma once
 
+#include <fstream>
+#include <sstream>
 #include <vector>
 #include "blocks/Block.h"
 
 class Map {
 public:
-    Map();
-    bool loadMap();
-private:
+    Map(const sf::Vector2u& windowSize);
+    //bool loadBlockTextures();
+
+    //std::vector<sf::Texture> blockTextures;
     std::vector<Block> blocks;
+private:
+    bool loadMap(const sf::Vector2u& windowSize);
 };

@@ -3,10 +3,10 @@
 #include <iostream>
 #include <fstream>
 #include "Player.h"
+#include "Map.h"
 #include "blocks/Block.h"
 #include "blocks/FinishBlock.h"
 
-void loadMap(std::vector<Block>& map, std::ifstream& mapFile, const sf::Vector2u& windowSize);
 
 int main()
 {
@@ -21,16 +21,11 @@ int main()
     sf::Clock clock;
 
     // OBJECTS
-    std::vector<Block> blocks;
+    Map gameMap(window.getSize());
+    std::vector<Block> blocks = gameMap.blocks;
     Player player(&blocks);
     sf::View playerCamera = player.Camera;
     playerCamera.setSize(sf::Vector2f(window.getSize()));
-
-    std::ifstream inputFile("resources/mapData_2.txt");
-    if (inputFile.is_open()) {
-        loadMap(blocks, inputFile, window.getSize());
-    }
-    inputFile.close();
 
     // GUIS
     sf::Font font;
@@ -105,32 +100,5 @@ int main()
         }
 
         window.display();
-    }
-}
-
-void loadMap(std::vector<Block>& map, std::ifstream& mapFile, const sf::Vector2u& windowSize) {
-    std::string line;
-    std::getline(mapFile, line); // discard header
-
-    while (mapFile.good()) {
-        std::stringstream ss;
-        std::string blockType, x, y;
-
-        std::getline(mapFile, line);
-        ss.str(line);
-
-        std::getline(ss, blockType, ',');
-        std::getline(ss, x, ',');
-        std::getline(ss, y);
-
-        sf::Vector2f blockPosition(std::stoi(x) * 50, (windowSize.y - 50) - (std::stoi(y) * 50));
-
-        if (blockType == "basicBlock") {
-            map.emplace_back(blockPosition.x, blockPosition.y);
-            // std::cout << "Block at position " << x << "," << y << " pushed to map vector" << std::endl;
-        }
-        // } else if (blockType == "finishBlock") {
-        //     map.push_back(FinishBlock(blockPosition.x, blockPosition.y));
-        // }
     }
 }
