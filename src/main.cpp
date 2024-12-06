@@ -6,12 +6,14 @@
 #include "Map.h"
 #include "blocks/Block.h"
 #include "blocks/FinishBlock.h"
+#include "MainMenu.h"
 
 
 int main()
 {
     auto window = sf::RenderWindow({1920u, 1080u}, "Racing Game");
     window.setFramerateLimit(144);
+
 
     // ATTRIBUTES
     bool gameOver = false;

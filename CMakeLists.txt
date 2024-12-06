@@ -25,7 +25,9 @@ add_executable(main src/main.cpp
         src/blocks/FinishBlock.cpp
         src/blocks/FinishBlock.h
         src/Map.cpp
-        src/Map.h)
+        src/Map.h
+        src/Game.h
+        src/Game.cpp)
 target_link_libraries(main PRIVATE sfml-graphics)
 target_compile_features(main PRIVATE cxx_std_17)
 
@@ -38,6 +40,6 @@ if(WIN32)
         PRE_BUILD COMMAND ${CMAKE_COMMAND} -E copy ${SFML_SOURCE_DIR}/extlibs/bin/$<IF:$<EQUAL:${CMAKE_SIZEOF_VOID_P},8>,x64,x86>/openal32.dll $<TARGET_FILE_DIR:main>
         VERBATIM)
 elseif(UNIX)
-    target_link_libraries(main PRIVATE X11)
-    include_directories (/usr/include/freetype2)
+#    target_link_libraries(main PRIVATE X11)
+#    include_directories (/usr/include/freetype2)
 endif()
