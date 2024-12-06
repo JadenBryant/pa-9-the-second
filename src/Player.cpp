@@ -14,7 +14,7 @@ Player::Player(std::vector<Block*> *blocks) {
     this->Camera.setCenter(this->getPosition());
 
     // ATTRIBUTES
-    this->walkSpeed = 10;
+    this->walkSpeed = 3;
 }
 
 // run every frame to manage physics, since player is the only thing moving
