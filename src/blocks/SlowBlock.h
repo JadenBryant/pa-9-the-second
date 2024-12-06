@@ -12,6 +12,6 @@ public:
     SlowBlock(int x, int y);
 
     void onTouch(Player& whoTouched) override;
-    bool Activated;
+    bool Activated; // prevent block from being used more than once
 };
 
