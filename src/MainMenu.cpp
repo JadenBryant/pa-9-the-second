@@ -18,7 +18,7 @@ MainMenu::MainMenu(sf::RenderWindow& window) : window(window), selectedItemIndex
 void MainMenu::initMenu() {
     backgroundSprite.setTexture(backgroundTexture);
     backgroundSprite.setScale(0.95, 0.95);
-    backgroundSprite.setPosition(-200, -150);
+    backgroundSprite.setPosition(0, -150);
 
     const std::vector<std::string> items = {"Play", "Credits", "Exit"};
     float yOffSet = 400.0f;
